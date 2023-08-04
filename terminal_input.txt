@@ -7,7 +7,7 @@
 >>> Author.objects.create(authorUser=user1)
 >>> user2 = User.objects.create(username='Second', first_name='Egor')
 >>> Author.objects.create(authorUser=user2)
->>> Category.objects.create(name='IT')
+>>> Category.objects.create(name='NewsFeed')
 >>> Category.objects.create(name='Education')
 >>> Category.objects.create(name='Different')
 >>> Category.objects.create(name='New')
