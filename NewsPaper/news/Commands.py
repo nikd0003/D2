@@ -1,4 +1,4 @@
-(venv) PS C:\!Course\SF_D\D2\NewsPaper>
+#(venv) PS C:\!Course\SF_D\D2\NewsPaper>
 # python manage.py makemigrations
 # python manage.py migrate
 # python manage.py shell 
