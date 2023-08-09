@@ -1,4 +1,4 @@
-#(venv) PS C:\!Course\SF_D\D2\NewsPaper>
+(venv) PS C:\!Course\SF_D\D2\NewsPaper>
 # python manage.py makemigrations
 # python manage.py migrate
 # python manage.py shell 
@@ -31,11 +31,11 @@
 >>> p2.postCategory.add(c1, c2, c3, c4)
 >>> p3.postCategory.add(c3, c2)
 >>> p4.postCategory.add(c4)
->>> Comment.objects.create(commentUser=User.objects.get(username='First'), commentPost = Post.objects.get(pk=1), text='comment text1')
->>> Comment.objects.create(commentUser=User.objects.get(username='Second'), commentPost = Post.objects.get(pk=1), text='comment text2')
->>> Comment.objects.create(commentUser=User.objects.get(username='First'), commentPost = Post.objects.get(pk=2), text='comment text1')
->>> Comment.objects.create(commentUser=User.objects.get(username='Second'), commentPost = Post.objects.get(pk=3), text='comment text1')
->>> Comment.objects.create(commentUser=User.objects.get(username='Second'), commentPost = Post.objects.get(pk=4), text='comment text1')
+>>> Comment.objects.create(commentUser=User.objects.get(username='First'), commentPost = Post.objects.get(pk=1), text='comment1 text1')
+>>> Comment.objects.create(commentUser=User.objects.get(username='Second'), commentPost = Post.objects.get(pk=1), text='comment1 text2')
+>>> Comment.objects.create(commentUser=User.objects.get(username='First'), commentPost = Post.objects.get(pk=2), text='comment2 text1')
+>>> Comment.objects.create(commentUser=User.objects.get(username='Second'), commentPost = Post.objects.get(pk=3), text='comment3 text1')
+>>> Comment.objects.create(commentUser=User.objects.get(username='Second'), commentPost = Post.objects.get(pk=4), text='comment4 text1')
 >>> Post.objects.get(pk=1).like()
 >>> Post.objects.get(pk=1).like()
 >>> Post.objects.get(pk=1).like()
