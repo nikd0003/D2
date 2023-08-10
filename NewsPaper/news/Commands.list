@@ -4,17 +4,13 @@
 # python manage.py shell 
 >>> from news.models import *
 >>> user1 = User.objects.create(username='First', first_name='Nik')
->>> Author.objects.create(authorUser=user1)
 >>> user2 = User.objects.create(username='Second', first_name='Egor')
+>>> Author.objects.create(authorUser=user1)
 >>> Author.objects.create(authorUser=user2)
 >>> Category.objects.create(name='Technology')
 >>> Category.objects.create(name='Education')
 >>> Category.objects.create(name='Society')
 >>> Category.objects.create(name='NewsFeed')
->>> Category.objects.create(name='Sport')
->>> Category.objects.create(name='Culture')
->>> Category.objects.create(name='Politics')
->>> Category.objects.create(name='Opinions')
 >>> Post.objects.create(author=Author.objects.get(authorUser=User.objects.get(username='First')), categoryType='NF', title='First title', text='First text text text text')
 >>> Post.objects.create(author=Author.objects.get(authorUser=User.objects.get(username='First')), categoryType='ART', title='Second title', text='Second text text text text')
 >>> Post.objects.create(author=Author.objects.get(authorUser=User.objects.get(username='Second')), categoryType='NF', title='First2 title', text='First2 text text text text')
