@@ -1,0 +1,73 @@
+PS C:\!Course\SF_D\D2> venv\Scripts\activate.ps1
+(venv) PS C:\!Course\SF_D\D2> cd NewsPaper
+(venv) PS C:\!Course\SF_D\D2\NewsPaper>
+# python manage.py makemigrations
+# python manage.py migrate
+# python manage.py shell
+
+Импортируем модели:
+from django.contrib.auth.models import User
+from news.models import *
+
+Создаем двух пользователей:
+User.objects.create_user(username='Nik', email='some@email.com', password='12345')
+User.objects.create_user(username='Somebody', email='other@email.com', password='54321')
+
+Создаем 2 авторов из ранее созданных пользователей:
+Author.objects.create(authorUser=User.objects.get(username='Nik'))
+Author.objects.create(authorUser=User.objects.get(username='Somebody'))
+
+Создаем 4 категории:
+Category.objects.create(name='Спорт')
+Category.objects.create(name='Политика')
+Category.objects.create(name='Технологии')
+Category.objects.create(name='Развлечения')
+
+Создаем 3 поста:
+Post.objects.create(author=Author.objects.get(authorUser__username='Nik'), title='О спорт ты мир!', text='Олимпийские игры')
+Post.objects.create(author=Author.objects.get(authorUser__username='Somebody'), title='Новости высоких технологий', text='Смартфон с самым ярким экраном в мире')
+Post.objects.create(author=Author.objects.get(authorUser__username='Nik'), title='Статья о политике', text='Поворот к реализму')
+
+Задаем катеогории статьям:
+Post.objects.get(title='Статья о политике').postCategory.set([Category.objects.get(name='Политика'), Category.objects.get(name='Развлечения')])  
+Post.objects.get(title='О спорт ты мир!').postCategory.set([Category.objects.get(name='Спорт')])
+Post.objects.get(title='Новости высоких технологий').postCategory.set([Category.objects.get(name='Развлечения'), Category.objects.get(name='Технологии')])
+
+Создаем комментарии:
+Comment.objects.create(commentPost=Post.objects.get(title='О спорт ты мир!'), commentUser=User.objects.get(username='Nik'), text='Отличная статья!')
+Comment.objects.create(commentPost=Post.objects.get(title='О спорт ты мир!'), commentUser=User.objects.get(username='Somebody'), text='Подтверждаю. Понравилоась!')
+Comment.objects.create(commentPost=Post.objects.get(title='Новости высоких технологий'), commentUser=User.objects.get(username='Nik'), text='Вот это да! Чем дальше, тем круче!')
+Comment.objects.create(commentPost=Post.objects.get(title='Статья о политике'), commentUser=User.objects.get(username='Nik'), text='Политика- это всегда грязь.')
+
+Ставим лайки/дизлайки постам и комментариям:
+Post.objects.get(title='О спорт ты мир!').like()
+Comment.objects.get(text='Вот это да! Чем дальше, тем круче!').like()
+Post.objects.get(pk=2).dislike()
+Comment.objects.get(pk=2).dislike()
+
+Обновляем рейтинг авторов:
+Author.objects.get(authorUser__username='Nik').update_rating()
+Author.objects.get(authorUser__username='Somebody').update_rating()
+
+Определяем лучшего автора и выводим его поля:
+best_author = Author.objects.all().order_by('-ratingAuthor')[0]
+best_author.authorUser
+best_author.ratingAuthor
+
+Определяем лучший пост и выводим его поля:
+best_post = Post.objects.order_by('-rating')[0]
+best_post.dateCreation.strftime('%d.%m.%Y')
+best_post.author
+best_post.title
+best_post.preview()
+
+Выводим поля комментариев лучшего поста:
+n = 0
+for i in best_post.comment_set.all():
+  n+=1
+  print(f'Комментарий #{n}')
+  i.dateCreation.strftime('%d.%m.%Y')
+  i.user
+  i.rating
+  i.text
+
