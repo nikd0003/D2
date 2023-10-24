@@ -1,9 +1,8 @@
 PS C:\!Course\SF_D\D2> venv\Scripts\activate.ps1
 (venv) PS C:\!Course\SF_D\D2> cd NewsPaper
-(venv) PS C:\!Course\SF_D\D2\NewsPaper>
-# python manage.py makemigrations
-# python manage.py migrate
-# python manage.py shell
+(venv) PS C:\!Course\SF_D\D2\NewsPaper>python manage.py makemigrations
+(venv) PS C:\!Course\SF_D\D2\NewsPaper>python manage.py migrate
+(venv) PS C:\!Course\SF_D\D2\NewsPaper>python manage.py shell
 
 Импортируем модели:
 from django.contrib.auth.models import User
